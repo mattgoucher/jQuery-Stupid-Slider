@@ -1,0 +1,23 @@
+{
+  "name": "jQuery-Stupid-Slider",
+  "version": "0.0.1",
+  "description": "Another jQuery slider.",
+  "homepage": "http://mattgoucher.com",
+  "author": {
+    "name": "Matt Goucher",
+    "url": "http://mattgoucher.com"
+  },
+  "bugs": {
+    "url": "https://github.com/mattgoucher/jQuery-Stupid-Slider"
+  },
+ "repository": {
+    "type": "git",
+    "url": "git@github.com:mattgoucher/jQuery-Stupid-Slider.git"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-jshint": "~0.7.2"
+  }
+}

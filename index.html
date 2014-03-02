@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>jQuery Stupid Slider &mdash; Demo</title>
+	</head>
+	<body>
+
+		<div id="slider">
+			<div class="slide"></div>
+			<div class="slide r"></div>
+			<div class="slide g "></div>
+			<div class="slide b"></div>
+		</div>
+
+		<button id="prev">Prev</button>
+		<button id="next">Next</button>
+
+		<script src="../jquery.equalize/jquery.min.js" type="text/javascript"></script>
+		<script src="jquery.stupid-slider.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			var slider = $("#slider").stupidSlider().data("stupidSlider");
+			$("#next").on("click", slider.next);
+			$("#prev").on("click", slider.previous);
+		</script>
+
+	</body>
+</html>

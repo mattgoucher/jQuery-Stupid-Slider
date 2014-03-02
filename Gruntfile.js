@@ -2,8 +2,6 @@ module.exports = function(grunt) {
 
   var packageBanner = '/*!\n' +
                       ' * <%= pkg.name.split("-").join(" ") %> v<%= pkg.version %>\n' +
-                      ' * mattgoucher.com\n *\n' +
-                      ' * Matt Goucher <matt@mattgoucher.com>\n' +
                       '*/\n';
 
   // Project configuration.
@@ -15,25 +13,14 @@ module.exports = function(grunt) {
         banner: packageBanner
       },
       build: {
-        src: [
-          'js/lib/jquery-1.10.2.min.js',
-          //'js/lib/modernizr-2.7.1.min.js',
-          'js/main.js'
-        ],
-        dest: 'build/main.min.js'
+        src: 'jquery.stupid-slider.js',
+        dest: 'dist/jquery.stupid-slider.min.js'
       }
     },
     watch: {
       scripts: {
         files: 'js/**/*.js',
         tasks: 'js',
-        options: {
-          spawn: false
-        }
-      },
-      css: {
-        files: 'css/**/*.css',
-        tasks: 'css',
         options: {
           spawn: false
         }
@@ -55,6 +42,6 @@ module.exports = function(grunt) {
 
   // Default task(s).
   grunt.registerTask('js', ['jshint', 'uglify']);
-  grunt.registerTask('default', ['jshint', 'cssmin', 'uglify']);
+  grunt.registerTask('default', ['jshint', 'uglify']);
 
 };

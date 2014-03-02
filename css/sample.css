@@ -3,10 +3,12 @@
  * ====================
  * Basic junk
 */
+html, body { position: relative; height: 100%; }
 #slider {
     position: relative;
+    margin: 0 0 20px 0;
     width: 100%;
-    height: 500px;
+    height: 80%;
     overflow: hidden;
     background: #263339;
 }

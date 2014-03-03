@@ -2,7 +2,7 @@
 
     function StupidSlider(el, options) {
 
-        var slides, currentIndex, activeSlide;
+        var slides, currentIndex, activeSlide, nextCtrl, prevCtrl;
 
         function init() {
 
@@ -11,8 +11,32 @@
             activeSlide  = $(); // Default to empty object, prevent blow up
             currentIndex = 0;
 
+            if (options.includeButtons) {
+                makeControls();
+            }
+
             // Go To First Slide
             goToSlide(currentIndex);
+        }
+
+
+        /**
+         * Create next/prev controls
+         * @return {undefiend}
+         */
+        function makeControls() {
+            console.log('controls');
+            nextCtrl = $("<button>", {
+                "class": options.nextCtrlClass || "stupid-next",
+                "text": options.nextText || "Next"
+            }).on("click", next);
+
+            prevCtrl = $("<button>", {
+                "class": options.prevCtrlClass || "stupid-prev",
+                "text": options.nextText || "Previous"
+            }).on("click", previous);
+
+            el.after(prevCtrl, nextCtrl);
         }
 
 
@@ -62,13 +86,47 @@
         }
 
 
+        /**
+         * Tear down the slider
+         * @return true
+         */
+        function destroy() {
+
+            // Remove classnames
+            el.removeData("stupidSlider").removeClass("no-transition");
+            slides.removeClass("visible old");
+
+            // Remove Controls
+            if (options.includeButtons) {
+                nextCtrl.unbind().remove();
+                prevCtrl.unbind().remove();
+            }
+
+            // Reset
+            activeSlice = slides = nextCtrl = prevCtrl = el = null;
+
+            return true;
+        }
+
+
+        /**
+         * Get the current slide index
+         * @return {int} slide index
+         */
+        function getCurrentSlide() {
+            return currentIndex;
+        }
+
+
         // Initialize Slider
         init();
 
         // Release Public API
         return {
             "next": next,
-            "previous": previous
+            "previous": previous,
+            "getCurrentSlide": getCurrentSlide,
+            "destroy": destroy
         };
     }
 
@@ -77,6 +135,9 @@
     $.fn.stupidSlider = function(options) {
         if (!this.data("stupidSlider")) {
             return this.data("stupidSlider", new StupidSlider(this, options));
+        }else if (typeof options === "string") {
+            // Slider already instanciated, attempt to run argument as command
+            return this.data("stupidSlider")[options]();
         }
     };
 

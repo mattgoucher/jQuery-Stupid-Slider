@@ -27,15 +27,23 @@
          * @return {undefiend}
          */
         function makeControls() {
-            nextCtrl = $("<button>", {
+            nextCtrl = $("<a>", {
+                "href": "#",
                 "class": options.nextCtrlClass || "stupid-next",
                 "text": options.nextText || "Next"
-            }).on("click", next);
+            }).on("click", function(e) {
+                e.preventDefault();
+                next();
+            });
 
-            prevCtrl = $("<button>", {
+            prevCtrl = $("<a>", {
+                "href": "#",
                 "class": options.prevCtrlClass || "stupid-prev",
                 "text": options.prevText || "Previous"
-            }).on("click", previous);
+            }).on("click", function(e) {
+                e.preventDefault();
+                previous();
+            });
 
             el.after(prevCtrl, nextCtrl);
         }
@@ -172,7 +180,7 @@
     // jQuery Public
     $.fn.stupidSlider = function(options) {
         if (!this.data("stupidSlider")) {
-            return this.data("stupidSlider", new StupidSlider(this, options));
+            return this.data("stupidSlider", new StupidSlider(this, options || {}));
         }else if (typeof options === "string") {
             // Slider already instanciated, attempt to run argument as command
             return this.data("stupidSlider")[options]();

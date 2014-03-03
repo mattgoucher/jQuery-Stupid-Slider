@@ -11,6 +11,8 @@
             activeSlide  = $(); // Default to empty object, prevent blow up
             currentIndex = 0;
 
+            el.removeClass("no-transition");
+
             if (options.includeButtons) {
                 makeControls();
             }

@@ -22,7 +22,7 @@ $ sudo npm install
 $ grunt
 ```
 
-Running ``grunt`` will compile/minify css and javascript, and place them in the correct directories, **once**. If you would like to "watch" for changes as you work, run ``grunt watch``.
+Running ``grunt`` will minify javascripts, and place them in the correct directories, **once**. If you would like to "watch" for changes as you work, run ``grunt watch``.
 
 
 #### Notes

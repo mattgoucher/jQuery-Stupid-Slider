@@ -18,6 +18,9 @@ html, body { position: relative; height: 100%; }
     display: block;
     width: 100%;
     height: 100%;
+    color: #fff;
+    font-size: 50px;
+    text-align: center;
     background-color: #34464f;
     -webkit-transition: left 500ms ease;
        -moz-transition: left 500ms ease;
@@ -29,7 +32,7 @@ html, body { position: relative; height: 100%; }
 #slider .slide.g { background-color: #344f38; }
 #slider .slide.b { background-color: #3a344f; }
 
-    /* Hold Transitions */
+    /* Hold Transitions - REQUIRED for looping */
     #slider.no-transition .slide {
         -webkit-transition: none;
            -moz-transition: none;

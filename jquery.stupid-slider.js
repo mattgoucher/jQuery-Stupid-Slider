@@ -25,7 +25,6 @@
          * @return {undefiend}
          */
         function makeControls() {
-            console.log('controls');
             nextCtrl = $("<button>", {
                 "class": options.nextCtrlClass || "stupid-next",
                 "text": options.nextText || "Next"
@@ -33,7 +32,7 @@
 
             prevCtrl = $("<button>", {
                 "class": options.prevCtrlClass || "stupid-prev",
-                "text": options.nextText || "Previous"
+                "text": options.prevText || "Previous"
             }).on("click", previous);
 
             el.after(prevCtrl, nextCtrl);
@@ -45,10 +44,7 @@
          * @param  {int} index Index
          * @return {undefiend}
          */
-        function goToSlide(index, direction) {
-
-            // We're OK to transition
-            el.removeClass("no-transition");
+        function goToSlide(index) {
 
             // Are we going left or right?
             if (index > currentIndex) {
@@ -65,12 +61,32 @@
 
 
         /**
-         * Navigate to next slide
+         * Navigate to next slides
          * @return undefined
          */
         function next() {
             if ((currentIndex + 1) < slides.length) {
                 goToSlide(currentIndex + 1);
+            }else if ((currentIndex + 1) === slides.length && options.loop) {
+
+                // Disable Transitions
+                el.addClass("no-transition");
+
+                // Shift Slides Around
+                el.prepend(slides.last().remove());
+                slides = el.children().removeClass("old");
+
+                // Reset Index
+                currentIndex = 0;
+
+                // Trigger Reflow
+                el[0].offsetHeight += 0;
+
+                // Allow Transitions
+                el.removeClass("no-transition");
+
+                // Go!
+                next();
             }
         }
 
@@ -82,6 +98,26 @@
         function previous() {
             if ((currentIndex - 1) >= 0) {
                 goToSlide(currentIndex - 1);
+            }else if ((currentIndex - 1) === -1 && options.loop) {
+                // Disable Transitions
+                el.addClass("no-transition");
+
+                // Shift Slides Around
+                slides.removeClass("old");
+                el.prepend(slides.last().addClass("old").remove());
+                slides = el.children();
+
+                // Reset Index
+                currentIndex = 0;
+
+                // Trigger Reflow
+                el[0].offsetHeight += 0;
+
+                // Allow Transitions
+                el.removeClass("no-transition");
+
+                // Go!
+                goToSlide(0);
             }
         }
 

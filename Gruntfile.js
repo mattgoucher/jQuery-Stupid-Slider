@@ -1,8 +1,6 @@
 module.exports = function(grunt) {
 
-  var packageBanner = '/*!\n' +
-                      ' * <%= pkg.name.split("-").join(" ") %> v<%= pkg.version %>\n' +
-                      '*/\n';
+  var packageBanner = '/*! <%= pkg.name.split("-").join(" ") %> v<%= pkg.version %> | Copyright (c) <%= new Date().getFullYear() %> <%= pkg.author.name %> | See LICENSE */\n';
 
   // Project configuration.
   grunt.initConfig({

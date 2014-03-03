@@ -36,7 +36,7 @@
             }
 
             // Make Sure We Remeber Where We Are
-            currentIndex = index;
+            currentIndex = index; 
         }
 
 
@@ -47,8 +47,6 @@
         function next() {
             if ((currentIndex + 1) < slides.length) {
                 goToSlide(currentIndex + 1);
-            }else{
-                // We need to loop back to the beginging
             }
         }
 
@@ -60,8 +58,6 @@
         function previous() {
             if ((currentIndex - 1) >= 0) {
                 goToSlide(currentIndex - 1);
-            }else{
-                // We need to loop back to the beginging
             }
         }
 

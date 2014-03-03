@@ -19,7 +19,7 @@ module.exports = function(grunt) {
     },
     watch: {
       scripts: {
-        files: 'js/**/*.js',
+        files: 'jquery.stupid-slider.js',
         tasks: 'js',
         options: {
           spawn: false
@@ -27,7 +27,7 @@ module.exports = function(grunt) {
       }
     },
     jshint: {
-      files: 'js/**/*.js',
+      files: 'jquery.stupid-slider.js',
       options: {
         // Ignore library files, because they never lint
         ignores: ['js/lib/*.js']

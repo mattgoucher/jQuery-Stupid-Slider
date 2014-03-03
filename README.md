@@ -1,5 +1,5 @@
 ### Stupid Slider
-A slider built to harness CSS transitions, instead of slow javascript ones. It will toggle classes on your slide elements, and shift the elements around to create a seemless, loopable slider.
+A slider built to harness CSS transitions, instead of slow javascript ones. It will toggle classes on your slide elements, and shift the elements around to create a seamless, loopable slider.
 
 #### Why?
 Because it's 2014, man. Lets add transitions to everything. Also, the plugin is less than **2k**

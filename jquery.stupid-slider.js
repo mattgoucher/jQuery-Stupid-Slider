@@ -13,6 +13,12 @@
 
             el.removeClass("no-transition");
 
+            // Can't loop if there is only one slide, WHOOPS
+            if (slides.length < 2) {
+                options.loop = false;
+                options.interval = false;
+            }
+
             if (options.includeButtons) {
                 makeControls();
             }

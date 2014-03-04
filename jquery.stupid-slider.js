@@ -2,7 +2,7 @@
 
     function StupidSlider(el, options) {
 
-        var slides, currentIndex, activeSlide, nextCtrl, prevCtrl;
+        var slides, currentIndex, activeSlide, nextCtrl, prevCtrl, timer, timerActive;
 
         function init() {
 
@@ -17,8 +17,17 @@
                 makeControls();
             }
 
+            if (options.hoverPause) {
+                el.on("mouseover", stopTimer).on("mouseout", startTimer);
+            }
+
             // Go To First Slide
             goToSlide(currentIndex);
+
+            // Start the looping timer
+            if (options.interval) {
+                startTimer();
+            }
         }
 
 
@@ -151,6 +160,11 @@
             // Reset
             activeSlice = slides = nextCtrl = prevCtrl = el = null;
 
+            // Clear the timer
+            if (timer) {
+                clearInterval(timer);
+            }
+
             return true;
         }
 
@@ -162,6 +176,35 @@
         function getCurrentSlide() {
             return currentIndex;
         }
+
+
+        /**
+         * Start a auto timer
+         * @return {[type]} [description]
+         */
+        function startTimer() {
+
+            // Prevent doubled instances
+            if (timerActive) {
+                return;
+            }
+
+            timerActive = true;
+            timer = setInterval(next, options.interval);
+        }
+
+
+        function stopTimer() {
+
+            // Can't remove timers that don't exist
+            if (!timerActive) {
+                return;
+            }
+
+            timerActive = false;
+            timer = clearInterval(timer);
+        }
+
 
 
         // Initialize Slider

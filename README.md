@@ -5,6 +5,8 @@ A slider built to harness CSS transitions, instead of slow javascript ones. It w
 
 #### Options
 
+	interval          {integer}   default: false            Number of milliseconds before going to next slide
+	hoverPause        {bool}      default: false            Stop the timer (interval) when hovering over the slider
     loop              {bool}      default: false            Should the slider loop back and forth
     includeButtons    {bool}      default: false            Adds "next" and "prev" buttons
         

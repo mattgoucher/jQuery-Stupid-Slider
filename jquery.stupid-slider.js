@@ -45,7 +45,7 @@
             nextCtrl = $("<a>", {
                 "href": "#",
                 "class": options.nextCtrlClass || "stupid-next",
-                "text": options.nextText || "Next"
+                "html": options.nextText || "Next"
             }).on("click", function(e) {
                 e.preventDefault();
                 next();
@@ -54,7 +54,7 @@
             prevCtrl = $("<a>", {
                 "href": "#",
                 "class": options.prevCtrlClass || "stupid-prev",
-                "text": options.prevText || "Previous"
+                "html": options.prevText || "Previous"
             }).on("click", function(e) {
                 e.preventDefault();
                 previous();

@@ -23,7 +23,10 @@
 				loop: true,
 				interval: 1000,
 				includeButtons: true,
-				hoverPause: true
+				hoverPause: true,
+				onTransition: function(index) {
+					console.log(index);
+				}
 			}).data("stupidSlider");
 		</script>
 

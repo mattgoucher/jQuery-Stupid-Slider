@@ -71,6 +71,10 @@
          */
         function goToSlide(index) {
 
+            if (options.onTransition) {
+                options.onTransition(index);
+            }
+
             // Are we going left or right?
             if (index > currentIndex) {
                 activeSlide.removeClass("visible").addClass("old");

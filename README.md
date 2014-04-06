@@ -1,20 +1,23 @@
 ### Stupid Slider
 A slider built to harness CSS transitions, instead of slow javascript ones. It will toggle classes on your slide elements, and shift the elements around to create a seamless, loopable slider. Wanna see for yourself? Check out this [Live Demo](http://mattgoucher.com/jquery.stupid-slider/)
 
-*Why?* It's 2014, man. Lets add transitions to everything. Also, the plugin is less than **2k**
+*Why?* It's 2014, man. Lets add transitions to everything.
 
 #### Options
 
 	interval          {integer}   default: false            Number of milliseconds before going to next slide
 	hoverPause        {bool}      default: false            Stop the timer (interval) when hovering over the slider
     loop              {bool}      default: false            Should the slider loop back and forth
-    includeButtons    {bool}      default: false            Adds "next" and "prev" buttons
+    nextAndPrev       {bool}      default: false            Adds "next" and "prev" buttons
+    controls          {bool}      default: false            "1 2 3" style controls
         
-    nextText          {string}    default: "Next"           What does the next button say
-    prevText          {string}    default: "Prev"           What does the prev button say
-    nextCtrlClass     {string}    default: "stupid-next"    Classname applied to the next button
-    prevCtrlClass     {string}    default: "stupid-prev"    Classname applied to the prev button
-
+    nextText          {string}    default: "Next"               What does the next button say
+    prevText          {string}    default: "Prev"               What does the prev button say
+    nextCtrlClass     {string}    default: "stupid-next"        Classname applied to the next button
+    prevCtrlClass     {string}    default: "stupid-prev"        Classname applied to the prev button
+	controlsClass     {string}    default: "stupid-controls"    Classname applied to the controls wrapper
+	controlItemClass  {string}    default: "stupid-control"     Classname applied to each control
+	controlItemText   {string}    default: slide index (int)    The text (or innerHtml) of each control
 
 #### Contributing
 This project utilizes [Grunt JS](http://gruntjs.com/) to compile/minify javascripts. If you haven't already, read the [getting started guide](http://gruntjs.com/getting-started). After Grunt has been installed, open your terminal, and cd into the project directory. Then:

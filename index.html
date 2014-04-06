@@ -22,10 +22,11 @@
 			var slider = $("#slider").stupidSlider({
 				loop: true,
 				interval: 1000,
-				includeButtons: true,
+				nextAndPrev: true,
 				hoverPause: true,
+				controls: true,
 				onTransition: function(index) {
-					console.log(index);
+					// Do Something!
 				}
 			}).data("stupidSlider");
 		</script>

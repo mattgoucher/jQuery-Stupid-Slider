@@ -32,6 +32,9 @@ html, body { position: relative; height: 100%; }
 #slider .slide.g { background-color: #344f38; }
 #slider .slide.b { background-color: #3a344f; }
 
+    /* Controls */
+    .stupid-controls .active { color: red; }
+
     /* Hold Transitions - REQUIRED for looping */
     #slider.no-transition .slide {
         -webkit-transition: none;

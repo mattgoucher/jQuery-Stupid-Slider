@@ -2,7 +2,7 @@
 
     function StupidSlider(el, options) {
 
-        var slides, currentIndex, activeSlide, nextCtrl, prevCtrl, timer, timerActive;
+        var slides, currentIndex, activeSlide, originalSlides, controls, nextCtrl, prevCtrl, timer, timerActive;
 
         function init() {
 
@@ -11,6 +11,14 @@
             activeSlide  = $(); // Default to empty object, prevent blow up
             currentIndex = 0;
 
+            // Store a "real index" on each slide
+            // This helps us keep track of where the slide started
+            // When looping is enabled, the slides get removed and appended
+            slides.each(function(i) {
+                $(this).attr("data-index", i);
+            });
+
+            // Allow transitions, we're setup
             el.removeClass("no-transition");
 
             // Can't loop if there is only one slide, WHOOPS
@@ -19,10 +27,17 @@
                 options.interval = false;
             }
 
-            if (options.includeButtons) {
+            // Include "next" and "previous" buttons
+            if (options.nextAndPrev) {
+                makeNextAndPrev();
+            }
+
+            // Add simple controls
+            if (options.controls) {
                 makeControls();
             }
 
+            // Pause timer on hover
             if (options.hoverPause && options.interval) {
                 el.on("mouseover", stopTimer).on("mouseout", startTimer);
             }
@@ -41,7 +56,7 @@
          * Create next/prev controls
          * @return {undefiend}
          */
-        function makeControls() {
+        function makeNextAndPrev() {
             nextCtrl = $("<a>", {
                 "href": "#",
                 "class": options.nextCtrlClass || "stupid-next",
@@ -65,12 +80,48 @@
 
 
         /**
+         * Add controls navigation (1, 2, 3...)
+         * @return {undefined}
+         */
+        function makeControls() {
+            var controlWrapper, controlItems = $();
+
+            // Control Item Wrapper
+            controlWrapper = $("<ul>", {
+                "class": options.controlsClass || "stupid-controls"
+            }).on("click", "li", function() {
+                navigateToSlide($(this).index());
+            });
+
+            // Generate Each Control Item
+            for (var i = 0; i < slides.length; i++) {
+                controlItems = controlItems.add(
+                    $("<li>", {
+                        "class": options.controlItemClass || "stupid-control",
+                        "html": options.controlItemText || (i + 1)
+                    })
+                );
+            }
+
+            // Store These For Later
+            controls = controlItems;
+
+            // Add Controls To Wrapper
+            controlWrapper.append(controlItems);
+
+            // Append Controls To Slider
+            el.after(controlWrapper);
+        }
+
+
+        /**
          * Go to a slide
          * @param  {int} index Index
          * @return {undefiend}
          */
         function goToSlide(index) {
 
+            // Fire on transition callback
             if (options.onTransition) {
                 options.onTransition(index);
             }
@@ -84,8 +135,33 @@
                 activeSlide = slides.eq(index).addClass("visible").removeClass("old");
             }
 
+            // Update controls navigation
+            if (options.controls) {
+                controls.eq(activeSlide.attr("data-index")).addClass("active").siblings().removeClass("active");
+            }
+
             // Make Sure We Remeber Where We Are
             currentIndex = index; 
+        }
+
+
+        /**
+         * Navigate to a slide using a control
+         * @note This needs a seperate method because the slide index changes
+         * @return {undefined}
+         */
+        function navigateToSlide(index) {
+            var currentSlide = getCurrentSlide(),
+                direction    = (index > currentSlide)? "next" : "prev",
+                slidesToMove = (index > currentSlide)? (index - currentSlide) : (currentSlide - index);
+
+            for (var i = 0; i < slidesToMove; i++) {
+                if (direction === "next") {
+                    next();
+                }else{
+                    previous();
+                }
+            }
         }
 
 
@@ -162,7 +238,7 @@
             slides.removeClass("visible old");
 
             // Remove Controls
-            if (options.includeButtons) {
+            if (options.nextAndPrev) {
                 nextCtrl.unbind().remove();
                 prevCtrl.unbind().remove();
             }
@@ -184,7 +260,7 @@
          * @return {int} slide index
          */
         function getCurrentSlide() {
-            return currentIndex;
+            return Number(activeSlide.attr("data-index"));
         }
 
 

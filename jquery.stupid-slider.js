@@ -23,7 +23,7 @@
                 makeControls();
             }
 
-            if (options.hoverPause) {
+            if (options.hoverPause && options.interval) {
                 el.on("mouseover", stopTimer).on("mouseout", startTimer);
             }
 
